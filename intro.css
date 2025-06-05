@@ -1,23 +1,24 @@
+/* Reset and basic styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html, body {
-  height: 100%;
   overflow-x: hidden;
-}
-
-body {
+  
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #7AA0AD;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 40px 0; /* only vertical padding */
+  padding: 40px 20px;
 }
 
-/* Header styles */
+/* Header fade in */
 h1 {
   font-size: 3.5rem;
   margin-bottom: 0.8em;
@@ -33,28 +34,110 @@ p.subheading {
   animation-delay: 0.6s;
 }
 
-/* Full-width white bar */
+/* About wrapper with border, shadow, and pop-out */
+.about-wrapper {
+   width: 100vw;  /* full viewport width */
+  background-color: white;
+  border: 2px solid #7AA0AD;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  margin-bottom: 3em;
+  padding: 30px 0 50px; /* vertical padding, no horizontal */
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center; /* center inner content horizontally */
+
+  transform: scale(0.97);
+  opacity: 0;
+  animation: popOut 0.6s forwards ease-out;
+  animation-delay: 1s;
+}
+
+
 .about-wrapper {
   width: 100vw;
   background-color: white;
+  border: 2px solid #7AA0AD;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  margin-bottom: 3em;
+  padding: 30px 0 50px;
+  box-sizing: border-box;
+
   display: flex;
   justify-content: center;
+
+  transform: scale(0.97);
+  opacity: 0;
+  animation: popOut 0.6s forwards ease-out;
+  animation-delay: 1s;
 }
 
-/* Content inside the white bar */
+.about-content {
+  width: 90vw;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+/* Buttons grid stays outside and independent */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 140px);
+  gap: 25px;
+  width: 90vw;
+  max-width: 700px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 1.5s;
+  margin: 0 auto 3em; /* center and spacing below */
+}
+
+
+
+.about-content {
+  width: 90vw;        /* responsive width */
+  max-width: 900px;   /* max width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;    /* some horizontal padding */
+}
+
+/* "About Me" header styling */
+.about-header {
+  font-size: 1.3rem;
+  color: #7AA0AD;
+  margin-bottom: 20px;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  user-select: none;
+
+  opacity: 0;
+  animation: fadeIn 0.6s forwards;
+  animation-delay: 0.9s; /* fade in just after main header */
+}
+
+/* About section - image and text side by side */
 .about-section {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
-  max-width: 1100px;
-  width: 100%;
-  padding: 40px 20px;
+  width: 90vw;
+  max-width: 900px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
 
+/* About image */
 .about-img {
   width: 50%;
   max-width: 400px;
@@ -69,13 +152,14 @@ p.subheading {
   transform: scale(1);
 }
 
+/* Text box next to image */
 .about-text-box {
   width: 50%;
   background-color: white;
   color: #7AA0AD;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   opacity: 0;
   transform: scale(0.8);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -87,15 +171,14 @@ p.subheading {
   transform: scale(1);
 }
 
-/* Button grid section */
+/* Buttons grid */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 140px);
   gap: 25px;
-  width: 90%;
+  width: 90vw;
   max-width: 700px;
-  margin: 3em auto;
   opacity: 0;
   animation: fadeIn 1s forwards;
   animation-delay: 1.5s;
@@ -139,9 +222,16 @@ a.button:hover {
   opacity: 0.85;
 }
 
-/* Animation */
+/* Animations */
 @keyframes fadeIn {
   to {
+    opacity: 1;
+  }
+}
+
+@keyframes popOut {
+  to {
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -153,28 +243,24 @@ a.button:hover {
     grid-template-rows: repeat(4, 120px);
     width: 90vw;
   }
-
   a.button {
     width: 100%;
     font-size: 1.2rem;
   }
-
   h1 {
     font-size: 2.8rem;
   }
-
   p.subheading {
     font-size: 1.2rem;
   }
-
   .about-section {
     flex-direction: column;
   }
-
-  .about-img,
-  .about-text-box {
+  .about-img, .about-text-box {
     width: 100%;
     max-width: none;
+  }
+  .about-text-box {
     text-align: center;
   }
 }
